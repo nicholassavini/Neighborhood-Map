@@ -1,9 +1,11 @@
-#map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
+#map, .container-full, .row {
+    height: 100%;
+}
+
 html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
