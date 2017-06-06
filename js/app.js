@@ -1,3 +1,8 @@
+
+var map;
+
+var markers = [];
+
 function initMap() {
     var locations = [
           {title: 'Lincoln Center', location: {lat: 40.7725, lng: -73.9835}},
@@ -6,9 +11,22 @@ function initMap() {
           {title: 'Carnegie Hall', location: {lat: 40.7651, lng: -73.9799}},
           {title: 'Met Museum', location: {lat: 40.7794, lng: -73.9632}}
         ];
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
-        center: {lat: 40.7725, lng: -73.9835}
+        center: locations[3].location
     });
+    for (var i = 0; i < locations.length; i++) {
+        var position = locations[i].location;
+        var title = locations[i].title;
 
+        var marker = new google.maps.Marker({
+          map: map,
+          position: position,
+          title: title,
+          animation: google.maps.Animation.DROP,
+          id: i
+        });
+
+        markers.push(marker);
+    }
 }
