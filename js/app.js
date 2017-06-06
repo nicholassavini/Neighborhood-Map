@@ -44,7 +44,7 @@ var markers = [];
 // View Model
 
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getEalementById('map'), {
         zoom: 14,
         center: locations[3].location
     });
@@ -65,7 +65,12 @@ function initMap() {
 }
 
 var ViewModel = function() {
+    var self = this;
 
+    var allLocations = ko.observableArray(['something']);
+
+    console.dir(allLocations)
+    console.log(allLocations.len)
 }
 
 ko.applyBindings(new ViewModel());
