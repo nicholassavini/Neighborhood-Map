@@ -33,8 +33,7 @@ var locations = [
             title: 'Met Museum',
             location: {
                 lat: 40.7794,
-                lng: -73.963
-                2
+                lng: -73.9632
             }
         }
 ];
@@ -64,3 +63,9 @@ function initMap() {
         markers.push(marker);
     }
 }
+
+var ViewModel = function() {
+
+}
+
+ko.applyBindings(new ViewModel());
