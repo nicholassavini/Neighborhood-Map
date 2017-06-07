@@ -31,9 +31,9 @@
         <div class="row">
             <div id="menu" class="col-md-3">
             <h1 class="text-center">Neighborhood Map</h1>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" data-bind="textInput: filter, event: {keyup: filterLocations}">
                 <div class="btn-group-vertical" role="group"
-                    data-bind="foreach: allLocations">
+                    data-bind="foreach: filteredLocations">
                     <button class="btn btn-default"
                         data-bind="text: title, click: $parent.setCenter">
                     </button>

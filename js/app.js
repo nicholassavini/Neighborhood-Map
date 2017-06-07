@@ -78,5 +78,22 @@ var ViewModel = function() {
         map.setCenter(place.location);
     }
 
+    this.filteredLocations = ko.observableArray();
+
+    this.allLocations().forEach(function(place) {
+        if (place.display == true) {
+            self.filteredLocations.push(place);
+        }
+    });
+
+    this.filter = ko.observable('');
+
+    this.filterLocations = function () {
+        self.allLocations().forEach(function (place) {
+            if (place.title.toLowerCase().indexOf(self.filter().toLowerCase()) < 0) {
+                self.filteredLocations.remove(place);
+            }
+        });
+    }
 }
 ko.applyBindings(new ViewModel());
