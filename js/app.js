@@ -6,35 +6,40 @@ var locations = [
             location: {
                 lat: 40.7725,
                 lng: -73.9835
-            }
+            },
+            display: true
         },
         {
             title: 'MOMA',
             location: {
                 lat: 40.7614,
                 lng: -73.9776
-            }
+            },
+            display: true
         },
         {
             title: 'Whitney Museum',
             location: {
                 lat: 40.7396,
                 lng: -74.0089
-            }
+            },
+            display: true
         },
         {
             title: 'Carnegie Hall',
             location: {
                 lat: 40.7651,
                 lng: -73.9799
-            }
+            },
+            display: true
         },
         {
             title: 'Met Museum',
             location: {
                 lat: 40.7794,
                 lng: -73.9632
-            }
+            },
+            display: true
         }
 ];
 
@@ -72,6 +77,21 @@ var ViewModel = function() {
     this.setCenter = function(place) {
         map.setCenter(place.location);
     }
-}
 
+    this.filterLocations = ko.pureComputed({
+        read: function() { return this.allLocations(); },
+        write: function(value) {
+            for (var i = 0; i < self.allLocations().length; i++) {
+                var currentLocation = self.allLocations()[i].title;
+                if (currentLocation.indexOf(value) == -1) {
+                    self.allLocations()[i].display = false;
+                } else {
+                    self.allLocations()[i].display = true;
+
+                }
+            }
+        },
+        owner: this
+    });
+}
 ko.applyBindings(new ViewModel());
