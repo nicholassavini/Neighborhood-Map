@@ -68,6 +68,10 @@ var ViewModel = function() {
     var self = this;
 
     this.allLocations = ko.observableArray(locations);
+
+    this.setCenter = function(place) {
+        map.setCenter(place.location);
+    }
 }
 
 ko.applyBindings(new ViewModel());

@@ -34,7 +34,8 @@
                 <div class="btn-group-vertical" role="group"
                     data-bind="foreach: locations">
                     <button class="btn btn-default"
-                        data-bind="text: title, attr: {'id': 'button_' + title}">
+                        data-bind="text: title, attr: {'id': $index},
+                            click: $parent.setCenter">
                     </button>
                 </div>
             </div>
