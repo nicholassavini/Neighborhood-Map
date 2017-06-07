@@ -31,11 +31,11 @@
         <div class="row">
             <div id="menu" class="col-md-3">
             <h1 class="text-center">Neighborhood Map</h1>
-                <input type="text" class="form-control" data-bind="textInput: filterLocations">
+                <input type="text" class="form-control">
                 <div class="btn-group-vertical" role="group"
                     data-bind="foreach: allLocations">
                     <button class="btn btn-default"
-                        data-bind="text: display, click: $parent.setCenter">
+                        data-bind="text: title, click: $parent.setCenter">
                     </button>
                 </div>
             </div>

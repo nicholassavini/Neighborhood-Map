@@ -78,20 +78,5 @@ var ViewModel = function() {
         map.setCenter(place.location);
     }
 
-    this.filterLocations = ko.pureComputed({
-        read: function() { return this.allLocations(); },
-        write: function(value) {
-            for (var i = 0; i < self.allLocations().length; i++) {
-                var currentLocation = self.allLocations()[i].title;
-                if (currentLocation.indexOf(value) == -1) {
-                    self.allLocations()[i].display = false;
-                } else {
-                    self.allLocations()[i].display = true;
-
-                }
-            }
-        },
-        owner: this
-    });
 }
 ko.applyBindings(new ViewModel());
