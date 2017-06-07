@@ -81,17 +81,17 @@ var ViewModel = function() {
     this.filteredLocations = ko.observableArray();
 
     this.allLocations().forEach(function(place) {
-        if (place.display == true) {
-            self.filteredLocations.push(place);
-        }
+        self.filteredLocations.push(place);
     });
 
     this.filter = ko.observable('');
 
     this.filterLocations = function () {
+        self.filteredLocations.removeAll();
+
         self.allLocations().forEach(function (place) {
-            if (place.title.toLowerCase().indexOf(self.filter().toLowerCase()) < 0) {
-                self.filteredLocations.remove(place);
+            if (place.title.toLowerCase().indexOf(self.filter().toLowerCase()) >= 0) {
+                self.filteredLocations.push(place);
             }
         });
     }
