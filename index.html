@@ -23,7 +23,7 @@
     </script>
 
     <!-- Main JS file -->
-    <script type='text/javascript' src='js/app.js' defer="defer"></script>
+    <script type='text/javascript' src='js/app.js' defer></script>
 
 </head>
 <body>
@@ -31,7 +31,12 @@
         <div class="row">
             <div id="menu" class="col-md-3">
             <h1 class="text-center">Neighborhood Map</h1>
-
+                <div class="btn-group-vertical" role="group"
+                    data-bind="foreach: locations">
+                    <button class="btn btn-default"
+                        data-bind="text: title, attr: {'id': 'button_' + title}">
+                    </button>
+                </div>
             </div>
             <div id="map" class="col-md-9"></div>
         </div>
