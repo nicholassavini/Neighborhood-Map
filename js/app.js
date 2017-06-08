@@ -90,7 +90,10 @@ var ViewModel = function() {
         self.filteredLocations.removeAll();
 
         self.allLocations().forEach(function (place) {
-            if (place.title.toLowerCase().indexOf(self.filter().toLowerCase()) >= 0) {
+            var filterItem = self.filter().toLowerCase();
+            var placeName = place.title.toLowerCase();
+
+            if (placeName.indexOf(filterItem) >= 0) {
                 self.filteredLocations.push(place);
             }
         });
