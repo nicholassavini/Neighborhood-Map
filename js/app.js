@@ -59,14 +59,18 @@ function initMap() {
 var ViewModel = function() {
     var self = this;
 
+    // create inital arrays to hold all locations
     this.allLocations = ko.observableArray(locations);
     this.filteredLocations = ko.observableArray(locations);
 
+    // resets the center of the maps when a location is clicked
     this.setCenter = function(location) {
         map.setCenter(location.position);
         location.marker.setAnimation(google.maps.Animation.DROP);
 
     }
+
+    // generates markers for the map
     this.allLocations().forEach(function(location) {
         var marker = new google.maps.Marker({
             map: map,
@@ -77,10 +81,10 @@ var ViewModel = function() {
         location.marker = marker;
     });
 
-
-
+    // the text entered into the search filter
     this.filter = ko.observable('');
 
+    // filters out locations that don't meet the search criteria
     this.filterLocations = function () {
         self.filteredLocations.removeAll();
 
