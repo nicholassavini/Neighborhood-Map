@@ -77,6 +77,7 @@ var ViewModel = function() {
 
     this.setCenter = function(place) {
         map.setCenter(place.location);
+        place.marker.setAnimation(google.maps.Animation.DROP);
 
     }
 
