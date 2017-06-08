@@ -44,7 +44,6 @@ var locations = [
 ];
 
 var map;
-var markers = [];
 
 // View Model
 
@@ -64,7 +63,6 @@ function initMap() {
           id: i
         });
 
-        markers.push(marker);
         location.marker = marker;
     }
 }
