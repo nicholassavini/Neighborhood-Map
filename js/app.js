@@ -7,7 +7,7 @@ var locations = [
                 lat: 40.7725,
                 lng: -73.9835
             },
-            display: true
+            marker: null
         },
         {
             title: 'MOMA',
@@ -15,7 +15,7 @@ var locations = [
                 lat: 40.7614,
                 lng: -73.9776
             },
-            display: true
+            marker: null
         },
         {
             title: 'Whitney Museum',
@@ -23,7 +23,7 @@ var locations = [
                 lat: 40.7396,
                 lng: -74.0089
             },
-            display: true
+            marker: null
         },
         {
             title: 'Carnegie Hall',
@@ -31,7 +31,7 @@ var locations = [
                 lat: 40.7651,
                 lng: -73.9799
             },
-            display: true
+            marker: null
         },
         {
             title: 'Met Museum',
@@ -39,7 +39,7 @@ var locations = [
                 lat: 40.7794,
                 lng: -73.9632
             },
-            display: true
+            marker: null
         }
 ];
 
@@ -66,6 +66,7 @@ function initMap() {
         });
 
         markers.push(marker);
+        locations[i].marker = marker;
     }
 }
 
@@ -76,6 +77,7 @@ var ViewModel = function() {
 
     this.setCenter = function(place) {
         map.setCenter(place.location);
+
     }
 
     this.filteredLocations = ko.observableArray();
@@ -88,13 +90,17 @@ var ViewModel = function() {
 
     this.filterLocations = function () {
         self.filteredLocations.removeAll();
+        markers = [];
 
         self.allLocations().forEach(function (place) {
+            place.marker.setVisible(false);
             var filterItem = self.filter().toLowerCase();
             var placeName = place.title.toLowerCase();
 
             if (placeName.indexOf(filterItem) >= 0) {
                 self.filteredLocations.push(place);
+                place.marker.setVisible(true);
+                place.marker.setAnimation(google.maps.Animation.DROP);
             }
         });
     }
