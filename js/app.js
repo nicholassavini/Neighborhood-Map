@@ -3,7 +3,7 @@
 var locations = [
         {
             title: 'Lincoln Center',
-            location: {
+            position: {
                 lat: 40.7725,
                 lng: -73.9835
             },
@@ -11,7 +11,7 @@ var locations = [
         },
         {
             title: 'MOMA',
-            location: {
+            position: {
                 lat: 40.7614,
                 lng: -73.9776
             },
@@ -19,7 +19,7 @@ var locations = [
         },
         {
             title: 'Whitney Museum',
-            location: {
+            position: {
                 lat: 40.7396,
                 lng: -74.0089
             },
@@ -27,7 +27,7 @@ var locations = [
         },
         {
             title: 'Carnegie Hall',
-            location: {
+            position: {
                 lat: 40.7651,
                 lng: -73.9799
             },
@@ -35,7 +35,7 @@ var locations = [
         },
         {
             title: 'Met Museum',
-            location: {
+            position: {
                 lat: 40.7794,
                 lng: -73.9632
             },
@@ -51,22 +51,21 @@ var markers = [];
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
-        center: locations[3].location
+        center: locations[3].position
     });
     for (var i = 0; i < locations.length; i++) {
-        var position = locations[i].location;
-        var title = locations[i].title;
+        var location = locations[i];
 
         var marker = new google.maps.Marker({
           map: map,
-          position: position,
-          title: title,
+          position: location.position,
+          title: location.title,
           animation: google.maps.Animation.DROP,
           id: i
         });
 
         markers.push(marker);
-        locations[i].marker = marker;
+        location.marker = marker;
     }
 }
 
@@ -75,33 +74,32 @@ var ViewModel = function() {
 
     this.allLocations = ko.observableArray(locations);
 
-    this.setCenter = function(place) {
-        map.setCenter(place.location);
-        place.marker.setAnimation(google.maps.Animation.DROP);
+    this.setCenter = function(location) {
+        map.setCenter(location.position);
+        location.marker.setAnimation(google.maps.Animation.DROP);
 
     }
 
     this.filteredLocations = ko.observableArray();
 
-    this.allLocations().forEach(function(place) {
-        self.filteredLocations.push(place);
+    this.allLocations().forEach(function(location) {
+        self.filteredLocations.push(location);
     });
 
     this.filter = ko.observable('');
 
     this.filterLocations = function () {
         self.filteredLocations.removeAll();
-        markers = [];
 
-        self.allLocations().forEach(function (place) {
-            place.marker.setVisible(false);
+        self.allLocations().forEach(function (location) {
+            location.marker.setVisible(false);
             var filterItem = self.filter().toLowerCase();
-            var placeName = place.title.toLowerCase();
+            var locationName = location.title.toLowerCase();
 
-            if (placeName.indexOf(filterItem) >= 0) {
-                self.filteredLocations.push(place);
-                place.marker.setVisible(true);
-                place.marker.setAnimation(google.maps.Animation.DROP);
+            if (locationName.indexOf(filterItem) >= 0) {
+                self.filteredLocations.push(location);
+                location.marker.setVisible(true);
+                location.marker.setAnimation(google.maps.Animation.DROP);
             }
         });
     }
