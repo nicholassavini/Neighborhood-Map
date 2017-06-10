@@ -83,8 +83,10 @@ var ViewModel = function() {
     // resets the center of the maps when a location is clicked
     this.setCenter = function(location) {
         map.setCenter(location.position);
-        location.marker.setAnimation(google.maps.Animation.DROP);
-
+        location.marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function(){
+            location.marker.setAnimation(null);
+        }, 1440);
     }
 
     // the text entered into the search filter
