@@ -63,19 +63,25 @@ function initMap() {
 
 // Get info from New York Times API
 var nyTimesArticles = function(location, infoWindow) {
-    var nyturl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    nyturl += '?' + $.param({ 'api-key': "44aad7b8bb1043c494f83b4ecc6509ab",
-    'q': '"' + location.title + '"'
+    var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    nytUrl += '?' + $.param({
+        'api-key': "44aad7b8bb1043c494f83b4ecc6509ab",
+        'q': location.title,
+        'sort': "newest",
+        'page': 5
     });
-    $.getJSON(nyturl, function(data) {
-        //$nytHeaderElem.text('New York Times Articles About ' + city);
-        location.content = "<ul>";
-        var articles = data.response.docs;
-        $.each(articles, function(key) {
-            var article = articles[key];
-            location.content += '<li class="article">' + '<a href="'
-                            + article.web_url + '">' + article.headline.main
-                            + '</a>' + '</p>' + '</li>';
+    $.ajax({
+        url: nytUrl,
+        method: 'GET',
+    }).done(function(data) {
+            //$nytHeaderElem.text('New York Times Articles About ' + city);
+            location.content = "<ul>";
+            var articles = data.response.docs;
+            $.each(articles, function(key) {
+                var article = articles[key];
+                location.content += '<li class="article">' + '<a href="'
+                                + article.web_url + '">' + article.headline.main
+                                + '</a>' + '</p>' + '</li>';
 
         });
         location.content += "</ul>";
