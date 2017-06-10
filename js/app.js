@@ -71,6 +71,15 @@ var ViewModel = function() {
     // Creates the info window object
     var infoWindow = new google.maps.InfoWindow();
 
+    // Sets the marker to bounce for a period of time
+
+    this.bounceMarker = function(location) {
+        location.marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function(){
+            location.marker.setAnimation(null);
+        }, 1440);
+    }
+
     // generates markers for the map
     this.allLocations().forEach(function(location) {
         var marker = new google.maps.Marker({
@@ -82,6 +91,7 @@ var ViewModel = function() {
 
         // opens an info window when a marker is clicked
         marker.addListener('click', function() {
+            self.bounceMarker(location);
             infoWindow.setContent('Some info!');
             infoWindow.open(map, marker);
         });
@@ -92,10 +102,7 @@ var ViewModel = function() {
     // resets the center of the maps when a location is clicked
     this.setCenter = function(location) {
         map.setCenter(location.position);
-        location.marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function(){
-            location.marker.setAnimation(null);
-        }, 1440);
+        self.bounceMarker(location);
     }
 
     // the text entered into the search filter
