@@ -68,6 +68,9 @@ var ViewModel = function() {
         self.filteredLocations.push(location);
     });
 
+    // Creates the info window object
+    var infoWindow = new google.maps.InfoWindow();
+
     // generates markers for the map
     this.allLocations().forEach(function(location) {
         var marker = new google.maps.Marker({
@@ -75,6 +78,12 @@ var ViewModel = function() {
             position: location.position,
             title: location.title,
             animation: google.maps.Animation.DROP
+        });
+
+        // opens an info window when a marker is clicked
+        marker.addListener('click', function() {
+            infoWindow.setContent('Some info!');
+            infoWindow.open(map, marker);
         });
 
         location.marker = marker;
