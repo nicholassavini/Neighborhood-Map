@@ -8,7 +8,7 @@ var locations = [
                 lng: -73.9835
             },
             marker: null,
-            infoWindow: null
+            content: null
         },
         {
             title: 'MOMA',
@@ -17,7 +17,7 @@ var locations = [
                 lng: -73.9776
             },
             marker: null,
-            infoWindow: null
+            content: null
         },
         {
             title: 'Whitney Museum',
@@ -26,7 +26,7 @@ var locations = [
                 lng: -74.0089
             },
             marker: null,
-            infoWindow: null
+            content: null
         },
         {
             title: 'Carnegie Hall',
@@ -35,7 +35,7 @@ var locations = [
                 lng: -73.9799
             },
             marker: null,
-            infoWindow: null
+            content: null
         },
         {
             title: 'Met Museum',
@@ -44,7 +44,7 @@ var locations = [
                 lng: -73.9632
             },
             marker: null,
-            infoWindow: null
+            content: null
         }
 ];
 
@@ -61,29 +61,28 @@ function initMap() {
     ko.applyBindings(new ViewModel());
 }
 
-var nyTimesArticles = function(location) {
+// Get info from New York Times API
+var nyTimesArticles = function(location, infoWindow) {
     var nyturl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    nyturl += '?' + $.param({
-      'api-key': "44aad7b8bb1043c494f83b4ecc6509ab",
-      'q': '"' + location.title + '"'
+    nyturl += '?' + $.param({ 'api-key': "44aad7b8bb1043c494f83b4ecc6509ab",
+    'q': '"' + location.title + '"'
     });
-    var $content = $("<ul></ul>");
     $.getJSON(nyturl, function(data) {
         //$nytHeaderElem.text('New York Times Articles About ' + city);
-
+        location.content = "<ul>";
         var articles = data.response.docs;
         $.each(articles, function(key) {
             var article = articles[key];
-            $content.append('<li class="article">' + '<a href="'
+            location.content += '<li class="article">' + '<a href="'
                             + article.web_url + '">' + article.headline.main
-                            + '</a>' + '</p>' + '</li>');
+                            + '</a>' + '</p>' + '</li>';
 
         });
-    }).fail($content.text('New York Times Articles Not Found'));
-    //console.log($content);
-    location.infoWindow = $content;
-    console.log(location.infoWindow);
+        location.content += "</ul>";
+    }).fail(location.content = 'New York Times Articles Not Found');
+
 }
+
 var ViewModel = function() {
     var self = this;
 
@@ -121,7 +120,7 @@ var ViewModel = function() {
         marker.addListener('click', function() {
             self.bounceMarker(location);
             nyTimesArticles(location);
-            infoWindow.setContent(location.infoWindow);
+            infoWindow.setContent(location.content);
             infoWindow.open(map, marker);
         });
 
