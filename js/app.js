@@ -62,7 +62,7 @@ function initMap() {
 }
 
 // Get info from New York Times API
-var nyTimesArticles = function(location, infoWindow) {
+var nyTimesArticles = function(location) {
     var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     nytUrl += '?' + $.param({
         'api-key': "44aad7b8bb1043c494f83b4ecc6509ab",
@@ -74,19 +74,22 @@ var nyTimesArticles = function(location, infoWindow) {
         url: nytUrl,
         method: 'GET',
     }).done(function(data) {
-            //$nytHeaderElem.text('New York Times Articles About ' + city);
-            location.content = "<ul>";
-            var articles = data.response.docs;
-            $.each(articles, function(key) {
-                var article = articles[key];
-                location.content += '<li class="article">' + '<a href="'
-                                + article.web_url + '">' + article.headline.main
-                                + '</a>' + '</p>' + '</li>';
+    //$.getJSON(nytUrl, function( data ) {
+        //$nytHeaderElem.text('New York Times Articles About ' + city);
+        location.content = "<ul>";
+        var articles = data.response.docs;
+        $.each(articles, function(key) {
+            var article = articles[key];
+            location.content += '<li class="article">' + '<a href="'
+                            + article.web_url + '">' + article.headline.main
+                            + '</a>' + '</p>' + '</li>';
 
         });
         location.content += "</ul>";
-    }).fail(location.content = 'New York Times Articles Not Found');
-
+    });//.fail(location.content = 'New York Times Articles Not Found');
+    console.log(locations);
+    content = location.content
+    return content;
 }
 
 var ViewModel = function() {
@@ -125,8 +128,7 @@ var ViewModel = function() {
         // opens an info window when a marker is clicked
         marker.addListener('click', function() {
             self.bounceMarker(location);
-            nyTimesArticles(location);
-            infoWindow.setContent(location.content);
+            infoWindow.setContent(nyTimesArticles(location));
             infoWindow.open(map, marker);
         });
 
