@@ -74,13 +74,12 @@ var nyTimesArticles = function (location, infoWindow, marker) {
         url: nytUrl,
         method: 'GET',
     }).done(function(data) {
-   // $.getJSON(nytUrl, function( data) {
-        //$nytHeaderElem.text('New York Times Articles About ' + city);
-        var content = '<ul>'
+        var content = '<h3 class="text-center">New York Times Articles About '
+        + location.title + '</h3><ul>'
         var articles = data.response.docs;
         $.each(articles, function(key) {
             var article = articles[key];
-            content += '<li class="article">' + '<a href="'
+            content += '<li class="col-md-9">' + '<a href="'
                             + article.web_url + '">' + article.headline.main
                             + '</a>' + '</p>' + '</li>';
         });
@@ -88,7 +87,10 @@ var nyTimesArticles = function (location, infoWindow, marker) {
         infoWindow.setContent(content);
         infoWindow.open(map, marker);
 
-    });//.fail(infoWindow.content = 'New York Times Articles Not Found');
+    }).fail(function() {
+        infoWindow.setContent('New York Times Articles Not Found');
+        infoWindow.open(map, marker);
+    });
 }
 
 var ViewModel = function() {
