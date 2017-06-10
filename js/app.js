@@ -56,6 +56,28 @@ function initMap() {
     ko.applyBindings(new ViewModel());
 }
 
+var nyTimesArticles = function(location) {
+    var nyturl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    nyturl += '?' + $.param({
+      'api-key': "44aad7b8bb1043c494f83b4ecc6509ab",
+      'q': '"' + location.title + '"'
+    });
+    var $content = $("<ul></ul>");
+    $.getJSON(nyturl, function(data) {
+        //$nytHeaderElem.text('New York Times Articles About ' + city);
+
+        var articles = data.response.docs;
+        $.each(articles, function(key) {
+            var article = articles[key];
+            $content.append('<li class="article">' + '<a href="'
+                            + article.web_url + '">' + article.headline.main
+                            + '</a>' + '</p>' + '</li>');
+
+        });
+    }).fail($content.text('New York Times Articles Not Found'));
+    //console.log($content);
+    return $content;
+}
 var ViewModel = function() {
     var self = this;
 
@@ -92,7 +114,7 @@ var ViewModel = function() {
         // opens an info window when a marker is clicked
         marker.addListener('click', function() {
             self.bounceMarker(location);
-            infoWindow.setContent('Some info!');
+            infoWindow.setContent(nyTimesArticles(location));
             infoWindow.open(map, marker);
         });
 
