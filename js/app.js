@@ -7,7 +7,8 @@ var locations = [
                 lat: 40.7725,
                 lng: -73.9835
             },
-            marker: null
+            marker: null,
+            infoWindow: null
         },
         {
             title: 'MOMA',
@@ -15,7 +16,8 @@ var locations = [
                 lat: 40.7614,
                 lng: -73.9776
             },
-            marker: null
+            marker: null,
+            infoWindow: null
         },
         {
             title: 'Whitney Museum',
@@ -23,7 +25,8 @@ var locations = [
                 lat: 40.7396,
                 lng: -74.0089
             },
-            marker: null
+            marker: null,
+            infoWindow: null
         },
         {
             title: 'Carnegie Hall',
@@ -31,7 +34,8 @@ var locations = [
                 lat: 40.7651,
                 lng: -73.9799
             },
-            marker: null
+            marker: null,
+            infoWindow: null
         },
         {
             title: 'Met Museum',
@@ -39,7 +43,8 @@ var locations = [
                 lat: 40.7794,
                 lng: -73.9632
             },
-            marker: null
+            marker: null,
+            infoWindow: null
         }
 ];
 
@@ -76,7 +81,8 @@ var nyTimesArticles = function(location) {
         });
     }).fail($content.text('New York Times Articles Not Found'));
     //console.log($content);
-    return $content;
+    location.infoWindow = $content;
+    console.log(location.infoWindow);
 }
 var ViewModel = function() {
     var self = this;
@@ -114,7 +120,8 @@ var ViewModel = function() {
         // opens an info window when a marker is clicked
         marker.addListener('click', function() {
             self.bounceMarker(location);
-            infoWindow.setContent(nyTimesArticles(location));
+            nyTimesArticles(location);
+            infoWindow.setContent(location.infoWindow);
             infoWindow.open(map, marker);
         });
 
