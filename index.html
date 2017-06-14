@@ -36,17 +36,31 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div id="menu" class="col-md-3 col-sm-0">
+            <div id="menu" class="col-md-3" col-sm-0"">
                 <div class="row">
-                    <h1 class="text-center">Neighborhood Map</h1>
+                    <div class="col-sm-12">
+                        <h1 class="text-center">Neighborhood Map</h1>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control"
-                        data-bind="textInput: filter, event: {keyup: filterLocations}">
+                    <div class="col-xs-1"></div>
+                    <div class="hamburger col-xs-10">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="hamburger">
+                            <span class="glyphicon glyphicon-align-justify"
+                            aria-hidden="true"></span>
+                            </span>
+                            <input type="text" class="form-control"
+                            data-bind="textInput: filter, event: {keyup: filterLocations}"
+                            aria-describedby="hamburger">
+                        </div>
                     </div>
-                    <div class="col-md-1"></div>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control no-hamburger"
+                        data-bind="textInput: filter, event: {keyup: filterLocations}"
+                        aria-describedby="hamburger">
+                    </div>
+                    <div class="col-xs-1"></div>
                 </div>
                 <div class="row">
                     <div class="col-md-1"></div>
