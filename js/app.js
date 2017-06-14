@@ -165,7 +165,6 @@ var ViewModel = function() {
     this.showItems = ko.observable(false);
 
     this.showMenu = function () {
-        console.log(this.showItems());
         if (this.showItems() == false) {
             this.showItems(true);
         } else {
