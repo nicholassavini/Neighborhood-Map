@@ -161,7 +161,7 @@ var ViewModel = function() {
         });
     }
 
-
+    // forces the display of location button when hamburger is clicked
     this.showItems = ko.observable(false);
 
     this.showMenu = function () {
