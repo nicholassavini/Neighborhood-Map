@@ -4,6 +4,7 @@
     <title>Neighborhood Map</title>
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
     </script>
@@ -31,7 +32,6 @@
 
     <!-- Main JS file -->
     <script type='text/javascript' src='js/app.js' defer></script>
-
 </head>
 <body>
     <div class="container-fluid">
@@ -46,7 +46,8 @@
                     <div class="col-xs-1"></div>
                     <div class="hamburger col-xs-10">
                         <div class="input-group">
-                            <span class="input-group-addon" id="hamburger">
+                            <span class="input-group-addon" id="hamburger"
+                            data-bind="click: showMenu">
                             <span class="glyphicon glyphicon-align-justify"
                             aria-hidden="true"></span>
                             </span>
@@ -69,7 +70,7 @@
                     </div>
                     <div class="col-md-1"></div>
                 </div>
-                <div class="row buttons">
+                <div class="row buttons" data-bind="css: {show: showItems() == true}">
                     <div class="col-md-2"></div>
                         <div class="col-md-8">
                             <div class="btn-group-vertical btn-group center-block"
