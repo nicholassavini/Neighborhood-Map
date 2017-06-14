@@ -8,4 +8,8 @@ html, body {
     height: 100%;
 }
 
+.divider {
+    border-color: #ccc;
+}
+
 
