@@ -61,6 +61,10 @@ function initMap() {
     ko.applyBindings(new ViewModel());
 }
 
+function mapError() {
+    alert("Google Maps cannot be reached at the moment.");
+}
+
 // Get info from New York Times API
 var nyTimesArticles = function (location, infoWindow, marker) {
     var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
