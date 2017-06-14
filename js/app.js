@@ -74,14 +74,14 @@ var nyTimesArticles = function (location, infoWindow, marker) {
         url: nytUrl,
         method: 'GET',
     }).done(function(data) {
-        var content = '<h3 class="text-center">New York Times Articles About'
-        + location.title + '</h3><ul>'
+        var content = '<h3 class="text-center">New York Times Articles About' +
+        location.title + '</h3><ul>';
         var articles = data.response.docs;
         $.each(articles, function(key) {
             var article = articles[key];
-            content += '<li class="col-md-9">' + '<a href="'
-                            + article.web_url + '">' + article.headline.main
-                            + '</a>' + '</p>' + '</li>';
+            content += '<li class="col-md-9">' + '<a href="' +
+                        article.web_url + '">' + article.headline.main +
+                        '</a>' + '</p>' + '</li>';
         });
         content += '</ul>';
         infoWindow.setContent(content);
@@ -91,7 +91,7 @@ var nyTimesArticles = function (location, infoWindow, marker) {
         infoWindow.setContent('New York Times Articles Not Found');
         infoWindow.open(map, marker);
     });
-}
+};
 
 var ViewModel = function() {
     var self = this;
@@ -115,7 +115,7 @@ var ViewModel = function() {
         setTimeout(function(){
             location.marker.setAnimation(null);
         }, 1440);
-    }
+    };
 
 
     // generates markers for the map
@@ -141,7 +141,7 @@ var ViewModel = function() {
         map.setCenter(location.position);
         self.bounceMarker(location);
         nyTimesArticles(location, infoWindow, location.marker);
-    }
+    };
 
     // the text entered into the search filter
     this.filter = ko.observable('');
@@ -161,16 +161,16 @@ var ViewModel = function() {
                 location.marker.setAnimation(google.maps.Animation.DROP);
             }
         });
-    }
+    };
 
     // forces the display of location button when hamburger is clicked
     this.showItems = ko.observable(false);
 
     this.showMenu = function () {
-        if (this.showItems() == false) {
+        if (this.showItems() === false) {
             this.showItems(true);
         } else {
             this.showItems(false);
         }
-    }
-}
+    };
+};
