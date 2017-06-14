@@ -74,7 +74,7 @@ var nyTimesArticles = function (location, infoWindow, marker) {
         url: nytUrl,
         method: 'GET',
     }).done(function(data) {
-        var content = '<h3 class="text-center">New York Times Articles About '
+        var content = '<h3 class="text-center">New York Times Articles About'
         + location.title + '</h3><ul>'
         var articles = data.response.docs;
         $.each(articles, function(key) {
@@ -117,6 +117,7 @@ var ViewModel = function() {
         }, 1440);
     }
 
+
     // generates markers for the map
     this.allLocations().forEach(function(location) {
         var marker = new google.maps.Marker({
@@ -139,6 +140,7 @@ var ViewModel = function() {
     this.setCenter = function(location) {
         map.setCenter(location.position);
         self.bounceMarker(location);
+        nyTimesArticles(location, infoWindow, location.marker);
     }
 
     // the text entered into the search filter
