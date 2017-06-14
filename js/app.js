@@ -61,6 +61,11 @@ function initMap() {
     ko.applyBindings(new ViewModel());
 }
 
+function mapError() {
+    alert("error");
+    console.log("error");
+}
+
 // Get info from New York Times API
 var nyTimesArticles = function (location, infoWindow, marker) {
     var nytUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
