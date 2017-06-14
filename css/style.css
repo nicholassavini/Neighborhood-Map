@@ -1,11 +1,15 @@
 /* Basic settings to display map */
-html, body {
+
+html,
+body {
     height: 100%;
     /*margin: 0;
     padding: 0;*/
 }
 
-#map, .container-fluid, .row {
+#map,
+.container-fluid,
+.row {
     height: 100%;
 }
 
@@ -15,12 +19,15 @@ html, body {
 }
 
 /* Controls when buttons are displayed */
+
 .show {
     display: inline;
 }
 
 @media (max-width: 768px) {
-    div.buttons, .divider, .no-hamburger {
+    div.buttons,
+    .divider,
+    .no-hamburger {
         display: none;
     }
 }
