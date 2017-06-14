@@ -12,4 +12,8 @@ html, body {
     border-color: #ccc;
 }
 
-
+@media (max-width: 768px) {
+    div.buttons, .divider {
+        display: none;
+    }
+}
