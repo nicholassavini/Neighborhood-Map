@@ -1,11 +1,11 @@
-#map, .container-full, .row {
-    height: 100%;
-}
-
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
+    /*margin: 0;
+    padding: 0;*/
+}
+
+#map, .container-fluid, .row {
+    height: 100%;
 }
 
 
